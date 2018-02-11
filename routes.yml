@@ -1,0 +1,9 @@
+/:
+  controller: Main
+  name: main
+auth:
+  controller: Authorization
+  name: auth
+auth/kinky:
+  controller: Kinky
+  name: kinky
