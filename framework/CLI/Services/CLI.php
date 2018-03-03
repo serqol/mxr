@@ -37,9 +37,8 @@ class CLI {
         $this->_annotation = $annotation;
         $this->_commandsByClasses = $this->getCommandsByClasses();
         foreach ($this->_commandsByClasses as $commandsByClass) {
-            $this->_commands = array_merge($this->_commands, $this->_utils->getFieldListFromCollection($commandsByClass, 'command'));
+            $this->_commands = array_merge($this->_commands, $this->_utils->getFieldListFromCollection($commandsByClass, '_name'));
         }
-
     }
 
     public function getCommands() {

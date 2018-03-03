@@ -38,7 +38,7 @@ if ($callInput === null) {
 $callArgs = isset($argv[2]) ? array_splice($argv, 2) : [];
 
 if (!in_array($callInput, $cliService->getCommands())) {
-    echo "\nInvalid command {$callInput}! \n\n";
+    echo "\nInvalid command '{$callInput}'! \n\n";
     $showHelp($commandsByClass);
 }
 

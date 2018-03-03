@@ -4,7 +4,7 @@ namespace Framework\CLI\Entities;
 
 class Command {
 
-    private $_name;
+    public $_name;
 
     private $description;
 

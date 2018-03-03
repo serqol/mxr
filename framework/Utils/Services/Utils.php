@@ -51,12 +51,12 @@ class Utils {
     public function getFieldListFromCollection(array $collection, $key) {
         $result = [];
         foreach ($collection as $element) {
-            if (is_object($collection && array_key_exists($key, $element))) {
+            if (is_object($element) && array_key_exists($key, get_object_vars($element))) {
+                $result[] = $element->$key;
+            } elseif (is_array($element) && array_key_exists($key, $element)) {
                 $result[] = $element[$key];
-            } elseif (in_array($key, get_object_vars($element))) {
-                $result[] = $element->key;
             }
-        }
+         }
 
         return $result;
     }
