@@ -1,0 +1,7 @@
+Database:
+  host: localhost
+  port: 3001
+  login: root
+  password: password
+  db_name: mxr
+  test_db_name: test_mxr

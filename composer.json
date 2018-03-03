@@ -1,0 +1,21 @@
+{
+    "name": "serqol/mxr",
+    "authors": [
+        {
+            "name": "serqol",
+            "email": "serqol@mail.ru"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Tests\\":"tests/",
+            "Controllers\\":"controllers/",
+            "Framework\\":"framework/",
+            "Exceptions\\":"exceptions/",
+            "Entities\\":"entities/"
+        }
+    },
+    "require": {
+        "phpunit/phpunit": "^6.5"
+    }
+}

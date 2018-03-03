@@ -3,8 +3,8 @@
 namespace Tests\Framework;
 use Exceptions\NotFound;
 use PHPUnit\Framework\TestCase;
-use Framework\Router;
-use Framework\Route;
+use Framework\Routing\Services\Router;
+use Framework\Routing\Entity\Route;
 
 class RouterTest extends TestCase {
 
@@ -33,12 +33,20 @@ class RouterTest extends TestCase {
     }
 
     /**
-     * @param $requestUri
+     * @param $routeName
      * @param $expected
-     * @dataProvider matchDataProvider
      */
-    public function testMatchNew($requestUri, $expected) {
-        $this->assertEquals($expected, $this->_router->matchNew($requestUri));
+    public function testGenerate($routeName, $expected) {
+        $this->assertEquals($expected, $this->_router->generate($routeName));
+    }
+
+    /**
+     * @return array
+     */
+    public function generateDataProvider() {
+        return [
+            ['auth', ''],
+        ];
     }
 
     /**
@@ -46,8 +54,8 @@ class RouterTest extends TestCase {
      */
     public function matchDataProvider() {
         return [
-            ['/test',          new Route('main',    'Controllers\Main',           'test')],
-            ['/auth/authorize', new Route('auth',    'Controllers\Authorization',  'authorize')],
+            ['/test',          new Route('main',    'Controllers\Main',           'testAction')],
+            ['/auth/authorize', new Route('auth',    'Controllers\Authorization',  'authorizeAction')],
         ];
     }
 }
