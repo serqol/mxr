@@ -18,7 +18,7 @@ $utils = Factory::instance(Utils::class);
 $commandsByClass = $cliService->getCommandsByClasses();
 
 $showHelp = function ($commandsByClass) use ($utils, $cliService) {
-    echo "Available commands: \n";
+    echo "Available commands: \n\n";
     foreach ($commandsByClass as $class => $commands) {
         echo "{$utils->getClassNameShort($class)} Provider: \n";
         /** @var Command $command */
@@ -26,7 +26,7 @@ $showHelp = function ($commandsByClass) use ($utils, $cliService) {
             echo "{$command->getName()} \n";
         }
     }
-    echo "\n\n";
+    echo "\n";
 };
 
 $callInput = isset($argv[1]) ? trim($argv[1]) : null;
@@ -35,12 +35,15 @@ if ($callInput === null) {
     $showHelp($commandsByClass);
 }
 
-$callArgs = isset($argv[2]) ? array_splice($argv, 2);
+$callArgs = isset($argv[2]) ? array_splice($argv, 2) : [];
 
-if (in_array($callInput, $cliService->getCommands())) {
-    try {
-        $cliService->getUserCall($callInput, $callArgs);
-    } catch (\Throwable $t) {
-        die($t->getMessage());
-    }
+if (!in_array($callInput, $cliService->getCommands())) {
+    echo "\nInvalid command {$callInput}! \n\n";
+    $showHelp($commandsByClass);
+}
+
+try {
+    $cliService->getUserCall($callInput, $callArgs);
+} catch (\Throwable $t) {
+    die($t->getMessage());
 }
