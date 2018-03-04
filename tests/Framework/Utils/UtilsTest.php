@@ -105,6 +105,27 @@ class UtilsTest extends TestCase {
         ];
     }
 
+    /**
+     * @param $array
+     * @param $expected
+     * @dataProvider quickSortDataProvider
+     */
+    public function testQuickSort($array, $expected) {
+        $this->assertEquals($expected, $this->_utils->quickSort($array));
+    }
+
+    /**
+     * @return array
+     */
+    public function quickSortDataProvider() {
+        return [
+            [
+                [5,3,21,7,4,53],
+                [3,4,5,7,21,53],
+            ]
+        ];
+    }
+
     public function getListFromArrayValuesDataProvider() {
         return [
             [

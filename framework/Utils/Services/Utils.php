@@ -120,4 +120,23 @@ class Utils {
         }
         return substr($className, $slashPosition + 1);
     }
+
+    public function quickSort($array) {
+        if (count($array) <= 1) {
+            return $array;
+        }
+        $pivot = array_pop($array);
+        $smallerValues = [];
+        $biggerValues = [];
+        while (count($array) > 0) {
+            if (($element = array_shift($array)) > $pivot) {
+                $biggerValues[] = $element;
+            } else {
+                $smallerValues[] = $element;
+            }
+        }
+        return (count($biggerValues) <= 1 && count($smallerValues) <= 1)
+            ? ($temp = array_merge($smallerValues, [$pivot], $biggerValues))
+            : array_merge($this->quickSort($smallerValues), [$pivot], $this->quickSort($biggerValues));
+    }
 }
