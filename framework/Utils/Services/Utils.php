@@ -121,6 +121,10 @@ class Utils {
         return substr($className, $slashPosition + 1);
     }
 
+    /**
+     * @param array $array
+     * @return array
+     */
     public function quickSort($array) {
         if (count($array) <= 1) {
             return $array;
