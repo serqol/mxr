@@ -186,8 +186,8 @@ class Utils {
      * @return mixed
      */
     public function bubbleSort($array) {
-        for ($i = 1; $i < count($array); $i++) {
-            for ($j = $i; $j > 0; $j--) {
+        for ($i = count($array); $i > 0; $i--) {
+            for ($j = 1; $j < $i; $j++) {
                 if ($array[$j] < $array[$j-1]) {
                     $temp = $array[$j-1];
                     $array[$j-1] = $array[$j];
@@ -196,6 +196,12 @@ class Utils {
             }
         }
         return $array;
+    }
+
+    public function insertionSort($array) {
+        for ($i = 1; $i < count($array); $i++) {
+
+        }
     }
 
     /**
