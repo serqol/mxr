@@ -182,7 +182,7 @@ class Utils {
     }
 
     /**
-     * @param $array
+     * @param array $array
      * @return mixed
      */
     public function bubbleSort($array) {
@@ -198,14 +198,31 @@ class Utils {
         return $array;
     }
 
+    /**
+     * @param array $array
+     * @return array
+     */
     public function insertionSort($array) {
-        for ($i = 1; $i < count($array); $i++) {
-
+        $sorted[] = array_shift($array);
+        while (count($array) > 0) {
+            $shifted = array_shift($array);
+            for ($i = count($sorted); $i > 0; $i--) {
+                if ($shifted > $sorted[$i-1]) {
+                    $firstPart = array_slice($sorted, 0, $i);
+                    $lastPart = array_slice($sorted, $i);
+                    $sorted = array_merge($firstPart, [$shifted], $lastPart);
+                    break;
+                } elseif ($i === 1) {
+                    array_unshift($sorted, $shifted);
+                    break;
+                }
+            }
         }
+        return $sorted;
     }
 
     /**
-     * @param $array
+     * @param array $array
      * @return array
      */
     public function selectionSort($array) {
