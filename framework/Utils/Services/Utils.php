@@ -143,4 +143,38 @@ class Utils {
             ? ($temp = array_merge($smallerValues, [$pivot], $biggerValues))
             : array_merge($this->quickSort($smallerValues), [$pivot], $this->quickSort($biggerValues));
     }
+
+    public function mergeSort($array)
+    {
+        $result = [];
+        $mid = count($array) / 2;
+        if ($mid >= 1) {
+            $leftHalf = array_slice($array, 0, $mid);
+            $rightHalf = array_slice($array, $mid);
+            $leftHalf = $this->mergeSort($leftHalf);
+            $rightHalf = $this->mergeSort($rightHalf);
+
+            while (count($leftHalf) > 0 || count($rightHalf) > 0) {
+                $leftValue = array_shift($leftHalf);
+                $rightValue = array_shift($rightHalf);
+                if ($leftValue === null) {
+                    $result[] = $rightValue;
+                    continue;
+                } elseif ($rightValue === null) {
+                    $result[] = $leftValue;
+                    continue;
+                }
+                if ($leftValue < $rightValue) {
+                    $result[] = $leftValue;
+                    array_unshift($rightHalf, $rightValue);
+                } else {
+                    $result[] = $rightValue;
+                    array_unshift($leftHalf, $leftValue);
+                }
+            }
+        } else {
+            return $array;
+        }
+        return $result;
+    }
 }
