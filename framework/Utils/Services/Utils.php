@@ -185,7 +185,7 @@ class Utils {
      * @param $array
      * @return mixed
      */
-    public function insertionSort($array) {
+    public function bubbleSort($array) {
         for ($i = 1; $i < count($array); $i++) {
             for ($j = $i; $j > 0; $j--) {
                 if ($array[$j] < $array[$j-1]) {
