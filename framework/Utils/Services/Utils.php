@@ -189,4 +189,23 @@ class Utils {
         }
         return $array;
     }
+
+    public function selectionSort($array) {
+        $result = [];
+        $arrayCount = count($array);
+        for ($i = 0; $i < $arrayCount; $i++) {
+            $min = current($array);
+            $minKey = key($array);
+            for ($j = 1; $j < count($array); $j++) {
+                if ($array[$j] < $min) {
+                    $min = $array[$j];
+                    $minKey = $j;
+                }
+            }
+            $result[] = $array[$minKey];
+            unset($array[$minKey]);
+            $array = array_values($array);
+        }
+        return $result;
+    }
 }
