@@ -124,14 +124,23 @@ class UtilsTest extends TestCase {
     }
 
     /**
+     * @param $array
+     * @param $expected
+     * @dataProvider quickSortDataProvider
+     */
+    public function testInsertionSort($array, $expected) {
+        $this->assertEquals($expected, $this->_utils->insertionSort($array));
+    }
+
+    /**
      * @return array
      */
     public function quickSortDataProvider() {
         return [
-            /*[
+            [
                 [5,3,21,7,4,53],
                 [3,4,5,7,21,53],
-            ],*/
+            ],
             [
                 [5,3,4,5,5,5,6,1,2],
                 [1,2,3,4,5,5,5,5,6],

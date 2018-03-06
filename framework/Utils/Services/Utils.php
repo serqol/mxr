@@ -144,8 +144,7 @@ class Utils {
             : array_merge($this->quickSort($smallerValues), [$pivot], $this->quickSort($biggerValues));
     }
 
-    public function mergeSort($array)
-    {
+    public function mergeSort($array) {
         $result = [];
         $mid = count($array) / 2;
         if ($mid >= 1) {
@@ -176,5 +175,18 @@ class Utils {
             return $array;
         }
         return $result;
+    }
+
+    public function insertionSort($array) {
+        for ($i = 1; $i < count($array); $i++) {
+            for ($j = $i; $j > 0; $j--) {
+                if ($array[$j] < $array[$j-1]) {
+                    $temp = $array[$j-1];
+                    $array[$j-1] = $array[$j];
+                    $array[$j] = $temp;
+                }
+            }
+        }
+        return $array;
     }
 }
