@@ -144,6 +144,10 @@ class Utils {
             : array_merge($this->quickSort($smallerValues), [$pivot], $this->quickSort($biggerValues));
     }
 
+    /**
+     * @param $array
+     * @return array
+     */
     public function mergeSort($array) {
         $result = [];
         $mid = count($array) / 2;
@@ -177,6 +181,10 @@ class Utils {
         return $result;
     }
 
+    /**
+     * @param $array
+     * @return mixed
+     */
     public function insertionSort($array) {
         for ($i = 1; $i < count($array); $i++) {
             for ($j = $i; $j > 0; $j--) {
@@ -190,6 +198,10 @@ class Utils {
         return $array;
     }
 
+    /**
+     * @param $array
+     * @return array
+     */
     public function selectionSort($array) {
         $result = [];
         $arrayCount = count($array);
