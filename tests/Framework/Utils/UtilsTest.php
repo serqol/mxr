@@ -146,6 +146,15 @@ class UtilsTest extends TestCase {
      * @param $expected
      * @dataProvider quickSortDataProvider
      */
+    public function testInsertionSortNew($array, $expected) {
+        $this->assertEquals($expected, $this->_utils->insertionSortNew($array));
+    }
+
+    /**
+     * @param $array
+     * @param $expected
+     * @dataProvider quickSortDataProvider
+     */
     public function testSelectionSort($array, $expected) {
         $this->assertEquals($expected, $this->_utils->selectionSort($array));
     }

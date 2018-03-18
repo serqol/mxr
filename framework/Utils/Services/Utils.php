@@ -221,6 +221,22 @@ class Utils {
         return $sorted;
     }
 
+    public function insertionSortNew(array $array) {
+        $result = $array;
+
+        for ($i = 0; $i < count($result); $i++) {
+            $unsortedElement = $result[$i];
+            for ($j = $i; $j > 0 && $unsortedElement < $result[$j-1]; $j--) {
+                $result[$j] = $result[$j - 1];
+            }
+            $result[$j] = $unsortedElement;
+        }
+
+        return $result;
+
+
+    }
+
     /**
      * @param array $array
      * @return array
@@ -243,4 +259,21 @@ class Utils {
         }
         return $result;
     }
+
+    /**
+     * @param array $array
+     * @return array
+     */
+    public function heapSort($array) {
+        $heap = $this->_buildMaxHeap($array);
+
+        return $array;
+    }
+
+    private function _buildMaxHeap(array $array) {
+        
+        return $array;
+    }
+
+
 }

@@ -14,8 +14,7 @@ class FactoryTest extends TestCase {
      */
     private $_factory;
 
-    protected function setUp()
-    {
+    protected function setUp() {
         parent::setUp();
         $this->_factory = new Factory();
     }
