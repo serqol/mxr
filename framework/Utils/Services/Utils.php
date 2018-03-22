@@ -265,15 +265,61 @@ class Utils {
      * @return array
      */
     public function heapSort($array) {
-        $heap = $this->_buildMaxHeap($array);
+        $result = [];
+        $maxHeap = $this->_buildMaxHeap($array);
+        $lastElement = count($maxHeap) - 1;
+        while ($lastElement > 0) {
+            $maxHeap = $this->_swap($maxHeap, 0, $lastElement);
+            $maxHeap = $this->_heapify($maxHeap, 0, $lastElement);
+            $lastElement--;
+        }
 
-        return $array;
+        return $maxHeap;
     }
 
     private function _buildMaxHeap(array $array) {
-        
+        $arrayLength = count($array);
+        $index = floor($arrayLength / 2 - 1);
+        while ($index >= 0) {
+            $array = $this->_heapify($array, $index, $arrayLength);
+            $index--;
+        }
         return $array;
     }
 
+    private function _heapify($array, $index, $arrayLength) {
 
+        while ($index < $arrayLength) {
+
+            $indexToSwap = $index;
+
+            $leftChildIndex =  2 * $index + 1;
+            $rightChildIndex = $leftChildIndex + 1;
+
+            if ($leftChildIndex < $arrayLength && $array[$leftChildIndex] > $array[$indexToSwap]) {
+                $indexToSwap = $leftChildIndex;
+            }
+
+            if ($rightChildIndex < $arrayLength && $array[$rightChildIndex] > $array[$indexToSwap]) {
+                $indexToSwap = $rightChildIndex;
+            }
+
+            if ($indexToSwap === $index) {
+                break;
+            }
+
+            $array =  $this->_swap($array, $index, $indexToSwap);
+
+            $index = $indexToSwap;
+        }
+
+        return $array;
+    }
+
+    private function _swap(array $array, $firstIndex, $secondIndex) {
+        $temp = $array[$firstIndex];
+        $array[$firstIndex] = $array[$secondIndex];
+        $array[$secondIndex] = $temp;
+        return $array;
+    }
 }

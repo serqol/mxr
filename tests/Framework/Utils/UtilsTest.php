@@ -128,6 +128,15 @@ class UtilsTest extends TestCase {
      * @param $expected
      * @dataProvider quickSortDataProvider
      */
+    public function testHeapSort($array, $expected) {
+        $this->assertEquals($expected, $this->_utils->heapSort($array));
+    }
+
+    /**
+     * @param $array
+     * @param $expected
+     * @dataProvider quickSortDataProvider
+     */
     public function testBubbleSort($array, $expected) {
         $this->assertEquals($expected, $this->_utils->bubbleSort($array));
     }
@@ -168,10 +177,10 @@ class UtilsTest extends TestCase {
                 [5,3,21,7,4,53],
                 [3,4,5,7,21,53],
             ],
-            [
+            /*[
                 [5,3,4,5,5,5,6,1,2],
                 [1,2,3,4,5,5,5,5,6],
-            ]
+            ]*/
         ];
     }
 
