@@ -139,9 +139,7 @@ class Utils {
                 $smallerValues[] = $element;
             }
         }
-        return (count($biggerValues) <= 1 && count($smallerValues) <= 1)
-            ? ($temp = array_merge($smallerValues, [$pivot], $biggerValues))
-            : array_merge($this->quickSort($smallerValues), [$pivot], $this->quickSort($biggerValues));
+        return array_merge($this->quickSort($smallerValues), [$pivot], $this->quickSort($biggerValues));
     }
 
     /**
