@@ -297,10 +297,24 @@ class Utils {
         $count = count($countArray);
         unset($countArray[$count - 1]);
 
-        foreach ($countArray as $key => $element) {
-            $result[$element] = $key;
+        foreach ($array as $key => $element) {
+            $result[$countArray[$element]] = $element;
         }
 
+        return $result;
+    }
+
+    public function crazySort(array $array) {
+        $result = [];
+        $countArray = array_pad([], $this->_getMaxValue($array) + 1, 0);
+        foreach ($array as $element) {
+            $countArray[$element] += 1;
+        }
+        foreach ($countArray as $key => $item) {
+            for ($j = 0; $j < $item; $j++) {
+                $result[] = $key;
+            }
+        }
         return $result;
     }
 

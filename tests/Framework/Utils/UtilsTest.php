@@ -178,13 +178,28 @@ class UtilsTest extends TestCase {
     }
 
     /**
+     * @param $array
+     * @param $expected
+     * @dataProvider quickSortDataProvider
+     */
+    public function testCrazySort($array, $expected) {
+        $this->assertEquals($expected, $this->_utils->crazySort($array));
+    }
+
+    /**
      * @return array
      */
     public function quickSortDataProvider() {
+        $testArray = array_map(function ($element) {
+            return rand(0, 1000);
+        },  array_pad([], 200, 0));
+        $resultArray = $testArray;
+        sort($resultArray);
+
         return [
             [
-                [5,3,21,7,4,53],
-                [3,4,5,7,21,53],
+                $testArray,
+                $resultArray,
             ],
             /*[
                 [5,3,4,5,5,5,6,1,2],
