@@ -139,7 +139,9 @@ class Utils {
                 $smallerValues[] = $element;
             }
         }
-        return array_merge($this->quickSort($smallerValues), [$pivot], $this->quickSort($biggerValues));
+        return (count($biggerValues) <= 1 && count($smallerValues) <= 1)
+            ? ($temp = array_merge($smallerValues, [$pivot], $biggerValues))
+            : array_merge($this->quickSort($smallerValues), [$pivot], $this->quickSort($biggerValues));
     }
 
     /**
@@ -273,6 +275,41 @@ class Utils {
         }
 
         return $maxHeap;
+    }
+
+    /**
+     * @param array $array
+     * @return array
+     */
+    public function countingSort(array $array) {
+        $result = array_pad([], count($array), 0);
+        $countArray = array_pad([], $this->_getMaxValue($array) + 1, 0);
+
+        foreach ($array as $element) {
+            $countArray[$element] += 1;
+        }
+
+        for ($i = 1; $i < count($countArray); $i++) {
+            $countArray[$i] += $countArray[$i - 1];
+        }
+
+        array_unshift($countArray, 0);
+        $count = count($countArray);
+        unset($countArray[$count - 1]);
+
+        foreach ($countArray as $key => $element) {
+            $result[$element] = $key;
+        }
+
+        return $result;
+    }
+
+    private function _getMaxValue(array $array) {
+        $max = array_shift($array);
+        while (count($array) > 0) {
+            $max = ($next = array_shift($array)) > $max ? $next : $max;
+        }
+        return $max;
     }
 
     private function _buildMaxHeap(array $array) {

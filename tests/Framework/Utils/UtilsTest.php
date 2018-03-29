@@ -124,6 +124,15 @@ class UtilsTest extends TestCase {
     }
 
     /**
+     * @param array $array
+     * @param array $expected
+     * @dataProvider quickSortDataProvider
+     */
+    public function testCountingSort($array, $expected) {
+        $this->assertEquals($expected, $this->_utils->countingSort($array));
+    }
+
+    /**
      * @param $array
      * @param $expected
      * @dataProvider quickSortDataProvider
