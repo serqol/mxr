@@ -132,6 +132,11 @@ class UtilsTest extends TestCase {
         $this->assertEquals($expected, $this->_utils->countingSort($array));
     }
 
+    public function testRadixSort() {
+        $array = [22, 45, 3, 540, 24, 2, 150];
+        $this->assertEquals([2, 3, 22, 24, 45, 150, 540], $this->_utils->radixSort($array, 3));
+    }
+
     /**
      * @param $array
      * @param $expected

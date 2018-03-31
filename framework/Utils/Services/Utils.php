@@ -297,11 +297,44 @@ class Utils {
         $count = count($countArray);
         unset($countArray[$count - 1]);
 
-        foreach ($array as $key => $element) {
-            $result[$countArray[$element]] = $element;
+        for ($i = 0; $i < count($countArray); $i++) {
+            $result[$countArray[$i]] = $i;
         }
 
         return $result;
+    }
+
+    public function radixSort(array $array, $maxDepth = 3) {
+        $depth = 0;
+        $array = array_map(function ($element) {
+            return array_reverse(str_split((string)$element));
+        }, $array);
+
+        while ($depth < $maxDepth) {
+            $array = $this->_sortByDepth($array, $depth++);
+        }
+        return array_map(function ($element) {
+            return (int)implode('', array_reverse($element));
+        }, $array);
+    }
+
+    private function _sortByDepth(array $array, $depth) {
+        $countingSort = array_pad([], 9, ['count' => 0, 'values' => []]);
+        for ($i = 0; $i < count($array); $i++) {
+            if (!isset($array[$i][$depth])) {
+                $array[$i][$depth] = 0;
+            }
+            $countingSort[$array[$i][$depth]]['count']++;
+            $countingSort[$array[$i][$depth]]['values'][] = $array[$i];
+        }
+        $sorted = [];
+        for ($j = 0; $j < count($countingSort); $j++) {
+            while ($countingSort[$j]['count']-- > 0) {
+                $sorted[] = array_shift($countingSort[$j]['values']);
+            }
+        }
+
+        return $sorted;
     }
 
     public function crazySort(array $array) {
