@@ -304,6 +304,38 @@ class Utils {
         return $result;
     }
 
+    public function radixSortNew(array $array, $queues = 9) {
+        $queues = array_pad([], $queues, []);
+        $max = current($array);
+        foreach ($array as $element) {
+            if ($element > $max) {
+                $max = $element;
+            }
+            array_push($queues[$element % 10], $element);
+        }
+        $i = 0;
+        foreach ($queues as $k => &$que) {
+            while (!empty($queues[$k])) {
+                $array[$i++] = array_shift($que);
+            }
+        }
+        $depth = 2;
+        while ($depth <= strlen((string)$max)) {
+            foreach ($array as $element) {
+                $digit = $depth <= strlen($element) ? (int)substr((int)($element % (pow(10, $depth))), 0, 1) : 0;
+                array_push($queues[$digit], $element);
+            }
+            $i = 0;
+            foreach ($queues as $k => &$que) {
+                while (!empty($queues[$k])) {
+                    $array[$i++] = array_shift($que);
+                }
+            }
+            $depth++;
+        }
+        return $array;
+    }
+
     public function radixSort(array $array, $maxDepth = 3) {
         $depth = 0;
         $array = array_map(function ($element) {
