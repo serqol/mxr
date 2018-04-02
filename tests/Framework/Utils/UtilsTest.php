@@ -138,7 +138,7 @@ class UtilsTest extends TestCase {
      * @param $expected
      */
     public function testRadixSort($array, $expected) {
-        $this->assertEquals($expected, $this->_utils->radixSort($array, 3));
+        $this->assertEquals($expected, $this->_utils->radixSort($array));
     }
 
     /**

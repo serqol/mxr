@@ -314,6 +314,11 @@ class Utils {
         while ($depth <= strlen((string)$max)) {
             foreach ($array as $element) {
                 $digit = $depth <= strlen($element) ? (int)substr((int)($element % (pow(10, $depth))), 0, 1) : 0;
+                var_dump([
+                    'digits' => $digit,
+                    'element' => $element,
+                    'depth' => $depth,
+                ]);
                 array_push($queues[$digit], $element);
             }
             $i = 0;
@@ -327,8 +332,14 @@ class Utils {
         return $array;
     }
 
-    public function radixSort(array $array, $maxDepth = 4) {
+    public function radixSort(array $array) {
         $depth = 0;
+        $maxDepth = strlen(current($array));
+        foreach ($array as $element) {
+            if (($len = strlen($element)) > $maxDepth) {
+                $maxDepth = $len;
+            }
+        }
         $array = array_map(function ($element) {
             return array_reverse(str_split((string)$element));
         }, $array);
