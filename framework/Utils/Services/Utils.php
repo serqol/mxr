@@ -282,29 +282,20 @@ class Utils {
      * @return array
      */
     public function countingSort(array $array) {
-        $result = array_pad([], count($array), 0);
+        $result = [];
         $countArray = array_pad([], $this->_getMaxValue($array) + 1, 0);
-
         foreach ($array as $element) {
             $countArray[$element] += 1;
         }
-
-        for ($i = 1; $i < count($countArray); $i++) {
-            $countArray[$i] += $countArray[$i - 1];
+        foreach ($countArray as $key => $item) {
+            for ($j = 0; $j < $item; $j++) {
+                $result[] = $key;
+            }
         }
-
-        array_unshift($countArray, 0);
-        $count = count($countArray);
-        unset($countArray[$count - 1]);
-
-        for ($i = 0; $i < count($countArray); $i++) {
-            $result[$countArray[$i]] = $i;
-        }
-
         return $result;
     }
 
-    public function radixSortNew(array $array, $queues = 9) {
+    public function radixSortNew(array $array, $queues = 10) {
         $queues = array_pad([], $queues, []);
         $max = current($array);
         foreach ($array as $element) {
@@ -336,7 +327,7 @@ class Utils {
         return $array;
     }
 
-    public function radixSort(array $array, $maxDepth = 3) {
+    public function radixSort(array $array, $maxDepth = 4) {
         $depth = 0;
         $array = array_map(function ($element) {
             return array_reverse(str_split((string)$element));
@@ -351,7 +342,7 @@ class Utils {
     }
 
     private function _sortByDepth(array $array, $depth) {
-        $countingSort = array_pad([], 9, ['count' => 0, 'values' => []]);
+        $countingSort = array_pad([], 10, ['count' => 0, 'values' => []]);
         for ($i = 0; $i < count($array); $i++) {
             if (!isset($array[$i][$depth])) {
                 $array[$i][$depth] = 0;
