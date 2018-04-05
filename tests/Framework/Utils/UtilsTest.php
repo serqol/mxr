@@ -129,7 +129,7 @@ class UtilsTest extends TestCase {
      * @dataProvider quickSortDataProvider
      */
     public function testCountingSort($array, $expected) {
-        $this->assertEquals($expected, $this->_utils->countingSort($array));
+        $this->assertEquals($expected, $this->_utils->countingSortNew($array));
     }
 
     /**
@@ -209,8 +209,8 @@ class UtilsTest extends TestCase {
      */
     public function quickSortDataProvider() {
         $testArray = array_map(function ($element) {
-            return rand(0, 1000);
-        },  array_pad([], 200, 0));
+            return rand(0, 10);
+        },  array_pad([], 10, 0));
         $resultArray = $testArray;
         sort($resultArray);
 

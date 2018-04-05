@@ -121,6 +121,30 @@ class Utils {
         return substr($className, $slashPosition + 1);
     }
 
+    public function countingSortNew(array $array) {
+        $max = $this->_getMaxValue($array);
+        $countArray = array_pad([], $max + 1, 0);
+
+        for ($i = 0; $i < count($array); $i++) {
+            $countArray[$array[$i]]++;
+        }
+
+        for ($i = 1; $i < count($countArray); $i++) {
+            $countArray[$i] += $countArray[$i - 1];
+        }
+
+        array_unshift($countArray, 0);
+        array_pop($countArray);
+
+        $sorted = array_pad([], count($array), 0);
+        for ($i = 0; $i < count($array); $i++) {
+            $sorted[$countArray[$array[$i]]] = $array[$i];
+            $countArray[$array[$i]]++;
+        }
+
+        return $sorted;
+    }
+
     /**
      * @param array $array
      * @return array
@@ -383,6 +407,16 @@ class Utils {
             }
         }
         return $result;
+    }
+
+    private function _getMinValue(array $array) {
+        $min = array_shift($array);
+        foreach ($array as $element) {
+            if ($element < $min) {
+                $min = $element;
+            }
+        }
+        return $min;
     }
 
     private function _getMaxValue(array $array) {
